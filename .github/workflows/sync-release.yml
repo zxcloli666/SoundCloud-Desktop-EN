@@ -84,7 +84,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d "$PAYLOAD")
 
-          TRANSLATED=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
+          TRANSLATED=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty' | perl -0777 -pe 's/<think>.*?<\/think>\s*//gs')
 
           if [ -z "$TRANSLATED" ]; then
             echo "AI translation failed, using original body"
@@ -125,7 +125,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d "$PAYLOAD")
 
-          TRANSLATED=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
+          TRANSLATED=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty' | perl -0777 -pe 's/<think>.*?<\/think>\s*//gs' | tr -d '\n')
           echo "name=${TRANSLATED:-$UPSTREAM_NAME}" >> "$GITHUB_OUTPUT"
 
       - name: Create release
