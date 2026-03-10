@@ -32,8 +32,11 @@ jobs:
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "name=$NAME" >> "$GITHUB_OUTPUT"
 
-          EXISTS=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$TAG" 2>/dev/null && echo "yes" || echo "no")
-          echo "exists=$EXISTS" >> "$GITHUB_OUTPUT"
+          if gh api "repos/$GITHUB_REPOSITORY/releases/tags/$TAG" > /dev/null 2>&1; then
+            echo "exists=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=no" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Download upstream assets
         if: steps.upstream.outputs.exists == 'no'
