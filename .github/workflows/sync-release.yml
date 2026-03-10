@@ -1,0 +1,139 @@
+name: Sync Release
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-release
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get latest upstream release
+        id: upstream
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE=$(gh api repos/zxcloli666/SoundCloud-Desktop/releases/latest)
+          TAG=$(echo "$RELEASE" | jq -r '.tag_name')
+          NAME=$(echo "$RELEASE" | jq -r '.name')
+
+          echo "$RELEASE" | jq -r '.body' > /tmp/upstream_body.md
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+          EXISTS=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$TAG" 2>/dev/null && echo "yes" || echo "no")
+          echo "exists=$EXISTS" >> "$GITHUB_OUTPUT"
+
+      - name: Download upstream assets
+        if: steps.upstream.outputs.exists == 'no'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPSTREAM_TAG: ${{ steps.upstream.outputs.tag }}
+        run: |
+          mkdir -p /tmp/assets
+          gh release download "$UPSTREAM_TAG" \
+            --repo zxcloli666/SoundCloud-Desktop \
+            --dir /tmp/assets \
+            --pattern '*'
+          ls -la /tmp/assets/
+
+      - name: Translate release notes
+        if: steps.upstream.outputs.exists == 'no'
+        env:
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL: ${{ secrets.AI_MODEL }}
+        run: |
+          BODY=$(cat /tmp/upstream_body.md)
+          ESCAPED_BODY=$(echo "$BODY" | jq -Rs .)
+
+          PAYLOAD=$(jq -n \
+            --arg model "${AI_MODEL:-deep-think}" \
+            --argjson body "$ESCAPED_BODY" \
+            '{
+              model: $model,
+              messages: [
+                {
+                  role: "system",
+                  content: "You are a translator. Translate the given release notes from Russian to English. Keep all markdown formatting, links, and version numbers intact. Do not add any commentary. If the text is already in English, return it as-is."
+                },
+                {
+                  role: "user",
+                  content: $body
+                }
+              ],
+              temperature: 0.3
+            }')
+
+          RESPONSE=$(curl -s "${AI_BASE_URL}/chat/completions" \
+            -H "Authorization: Bearer $AI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+
+          TRANSLATED=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
+
+          if [ -z "$TRANSLATED" ]; then
+            echo "AI translation failed, using original body"
+            cp /tmp/upstream_body.md /tmp/translated_body.md
+          else
+            echo "$TRANSLATED" > /tmp/translated_body.md
+          fi
+
+      - name: Translate release name
+        if: steps.upstream.outputs.exists == 'no'
+        id: translate_name
+        env:
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL: ${{ secrets.AI_MODEL }}
+          UPSTREAM_NAME: ${{ steps.upstream.outputs.name }}
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg model "${AI_MODEL:-deep-think}" \
+            --arg name "$UPSTREAM_NAME" \
+            '{
+              model: $model,
+              messages: [
+                {
+                  role: "system",
+                  content: "Translate the release title from Russian to English. Keep version numbers. Return ONLY the translated title, nothing else. If already in English, return as-is."
+                },
+                {
+                  role: "user",
+                  content: $name
+                }
+              ],
+              temperature: 0.3
+            }')
+
+          RESPONSE=$(curl -s "${AI_BASE_URL}/chat/completions" \
+            -H "Authorization: Bearer $AI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+
+          TRANSLATED=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
+          echo "name=${TRANSLATED:-$UPSTREAM_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        if: steps.upstream.outputs.exists == 'no'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPSTREAM_TAG: ${{ steps.upstream.outputs.tag }}
+          RELEASE_NAME: ${{ steps.translate_name.outputs.name }}
+        run: |
+          gh release create "$UPSTREAM_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$RELEASE_NAME" \
+            --notes-file /tmp/translated_body.md \
+            /tmp/assets/*
