@@ -150,7 +150,7 @@ Pull requests are welcome at the [main repository](https://github.com/zxcloli666
 | Shell | Tauri 2 (Rust) |
 | Frontend | React 19, Vite 7, Tailwind CSS 4 |
 | State | Zustand, TanStack Query |
-| Audio | Howler.js |
+| Audio | rodio (rust) |
 | UI | Radix UI |
 | Backend | NestJS 11, TypeORM, PostgreSQL |
 | CI/CD | GitHub Actions — builds for all platforms |
