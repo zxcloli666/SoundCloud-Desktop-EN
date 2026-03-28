@@ -38,7 +38,7 @@ No ads · No captcha · No restrictions · Lightweight
 > [!CAUTION]
 > Support project:
 > 
-> Бусти: https://boosty.to/lolinamide
+> Boosty: https://boosty.to/lolinamide
 > 
 > TON: UQAiVd_p6zV3iYNy0H9ZokH6_OEvzSrk-88taa7Mc2kE7pUZ
 > 
