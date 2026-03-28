@@ -35,6 +35,19 @@ No ads · No captcha · No restrictions · Lightweight
 </a>
 </p>
 
+> [!CAUTION]
+> Support project:
+> 
+> Бусти: https://boosty.to/lolinamide
+> 
+> TON: UQAiVd_p6zV3iYNy0H9ZokH6_OEvzSrk-88taa7Mc2kE7pUZ
+> 
+> LTC: LLw3Wh1eGDetjoCc76cbfEHusy1vvaupo8
+> 
+> BTC: bc1qqjk9vy453q9jxvpwm7qa4wg3fw03rgzfa9xadf
+> 
+> and vote - [#264](https://github.com/zxcloli666/SoundCloud-Desktop/discussions/264)
+
 ---
 
 ## What is this?
@@ -115,6 +128,13 @@ chmod +x soundcloud-desktop-*.AppImage
 - **Intel**: `*_x64.dmg`
 
 Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Desktop-EN/releases/latest). First launch: Right-click → Open.
+
+> [!NOTE]
+> **macOS blocking the launch?** The app isn't signed with an Apple Developer certificate, so Gatekeeper might show a "the app is damaged" error. It’s easily fixed with one command:
+> ```bash
+> xattr -cr /Applications/soundcloud-desktop.app
+> ```
+> After that, the app will launch normally.
 
 ---
 
