@@ -7,6 +7,7 @@
 <h1 align="center">SoundCloud Desktop</h1>
 
 <p align="center">
+<b>[<a href="https://github.com/okeydw/SoundCloud-Android">Android version</a>]</b><br>
 <b>Native desktop app for SoundCloud</b><br>
 No ads · No captcha · No restrictions · Lightweight
 </p>
@@ -34,19 +35,6 @@ No ads · No captcha · No restrictions · Lightweight
 <img src="https://img.shields.io/badge/Source_Code-Main_Repo-0066FF?style=for-the-badge&logo=github" alt="Source Code"/>
 </a>
 </p>
-
-> [!CAUTION]
-> Support project:
-> 
-> Boosty: https://boosty.to/lolinamide
-> 
-> TON: UQAiVd_p6zV3iYNy0H9ZokH6_OEvzSrk-88taa7Mc2kE7pUZ
-> 
-> LTC: LLw3Wh1eGDetjoCc76cbfEHusy1vvaupo8
-> 
-> BTC: bc1qqjk9vy453q9jxvpwm7qa4wg3fw03rgzfa9xadf
-> 
-> and vote - [#264](https://github.com/zxcloli666/SoundCloud-Desktop/discussions/264)
 
 ---
 
