@@ -79,7 +79,7 @@ The app interface is available in **English** and **Russian**. Language is detec
 - **Media controls** — keyboard media keys, Windows media overlay, MPRIS on Linux
 - **Discord Rich Presence** — show friends what you're listening to
 - **System tray** — runs in background
-- **Auto-updates** — new versions install with one click
+- **In-app updates** — the Windows installer, macOS and AppImage builds update with an "Install and restart" button, other builds get a direct link to the right file and the exact command
 
 ---
 
@@ -100,9 +100,22 @@ Requirements: Windows 10 (1809+) or Windows 11
 | `.deb` | amd64, arm64 | Ubuntu, Debian, Mint, Pop!_OS |
 | `.rpm` | amd64, arm64 | Fedora, openSUSE, CentOS |
 | `.AppImage` | amd64, arm64 | Universal, runs anywhere |
-| `.flatpak` | amd64 | Sandboxed, auto-updates |
+| `.flatpak` | amd64 | Sandboxed |
+| AUR `soundcloud-bin` | amd64, arm64 | Arch, Manjaro, EndeavourOS |
 
-Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Desktop-EN/releases/latest).
+Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Desktop-EN/releases/latest) or from the [website](https://soundcloud-desktop.fun/download) if GitHub does not open.
+
+Arch and derivatives: the official [`soundcloud-bin`](https://aur.archlinux.org/packages/soundcloud-bin) package is published to the AUR automatically within a minute of every release.
+```bash
+yay -S soundcloud-bin
+```
+There is also a community package, [`soundcloud-desktop-bin`](https://aur.archlinux.org/packages/soundcloud-desktop-bin), maintained by someone else. Install only one of the two.
+
+Install the Flatpak from our repository to get updates through `flatpak update` and app centers (GNOME Software, Discover):
+```bash
+flatpak install --user https://zxcloli666.github.io/SoundCloud-Desktop/flatpak/soundcloud-desktop.flatpakref
+```
+The downloaded `soundcloud-desktop.flatpak` connects the same repository when installed: `flatpak install --user soundcloud-desktop.flatpak`.
 
 For AppImage:
 ```bash
@@ -123,6 +136,23 @@ Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Deskt
 > xattr -cr /Applications/soundcloud-desktop.app
 > ```
 > After that, the app will launch normally.
+
+---
+
+## Updating
+
+The app checks for new versions at startup and every six hours. To check manually and see your version, open **Settings → General → Updates**.
+
+| Build | How it updates |
+|---|---|
+| Windows `setup.exe` / `.msi`, macOS `.dmg`, `.AppImage` | "Install and restart" button, settings and cache stay |
+| Windows portable | Quit the app from the tray (right-click the icon, then Quit) and replace the exe with the downloaded one |
+| `.deb` / `.rpm` | Install the new package over the old one |
+| AUR | `yay -Syu soundcloud-bin` |
+| Flatpak | `flatpak update` or your app center. Installed an older `.flatpak` and see no updates? Reinstall once with the new file: `flatpak install --user --reinstall soundcloud-desktop.flatpak` (without `--reinstall` it fails with "Directory not empty") |
+| Built from source | `git pull` and rebuild |
+
+If you installed a new version but the old one opens, the old one is still running in the tray: quit it with Quit and start the app again.
 
 ---
 
