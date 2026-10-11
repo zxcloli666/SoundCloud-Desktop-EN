@@ -7,7 +7,7 @@
 <h1 align="center">SoundCloud Desktop</h1>
 
 <p align="center">
-<b>[<a href="https://github.com/okeydw/SoundCloud-Android">Android version</a>]</b><br>
+<b>[<a href="https://github.com/okeydw/SoundCloud-Android">Android</a>] · iOS in development</b><br>
 <b>Native desktop app for SoundCloud</b><br>
 No ads · No captcha · No restrictions · Lightweight
 </p>
