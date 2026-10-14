@@ -38,6 +38,10 @@ No ads · No captcha · No restrictions · Lightweight
 
 ---
 
+![soundcloud-desktop-8.5](https://github.com/user-attachments/assets/139a431c-b624-49c3-b650-5a64cf5ada3e)
+
+---
+
 ## What is this?
 
 **SoundCloud Desktop** is a full-featured native desktop app for listening to music on SoundCloud. Built with Tauri 2 + React 19 — it runs natively, uses minimal resources, and never lags.
