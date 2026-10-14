@@ -38,7 +38,7 @@ No ads · No captcha · No restrictions · Lightweight
 
 ---
 
-![soundcloud-desktop-8.5](https://github.com/user-attachments/assets/139a431c-b624-49c3-b650-5a64cf5ada3e)
+![soundcloud-desktop-8.5](https://github.com/user-attachments/assets/5de1b459-34fb-4831-882b-42283f4cdc14)
 
 ---
 
