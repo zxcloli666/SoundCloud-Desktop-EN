@@ -69,14 +69,13 @@ Full access to the entire SoundCloud catalog regardless of your location. All tr
 ### Native & Lightweight
 
 Built with **Tauri 2** (Rust) instead of Electron:
-- Installer size **~15 MB** (not 200+ MB like Electron apps)
-- RAM usage **~80–120 MB** during playback
+- System WebView instead of a bundled Chromium
 - Instant startup
 - Smooth 60 FPS UI even on low-end hardware
 
 ### Multi-language
 
-The app interface is available in **English** and **Russian**. Language is detected automatically from your system settings.
+The app interface is available in **English**, **Russian**, **Turkish** and **Korean**. Language is detected automatically from your system settings.
 
 ### System Integration
 
@@ -92,10 +91,13 @@ The app interface is available in **English** and **Russian**. Language is detec
 ### Windows
 
 Go to the [releases page](https://github.com/zxcloli666/SoundCloud-Desktop-EN/releases/latest) and download:
-- **`.exe`** (NSIS installer) — recommended
-- **`.msi`** — alternative installer
+- **`*_x64-setup.exe`** - installer, recommended
+- **`*_x64_en-US.msi`** - alternative installer
+- **`soundcloud-desktop-portable.exe`** - portable, no install
 
 Requirements: Windows 10 (1809+) or Windows 11
+
+The app needs the Microsoft Edge WebView2 Runtime. The installers (~220 MB) carry it inside and install it without a download, antivirus tools flag such downloads. The portable exe (~43 MB) does not carry it: if WebView2 is missing or Windows is a stripped build, install the [Evergreen Standalone Installer](https://developer.microsoft.com/microsoft-edge/webview2/) as administrator. Edge itself is not needed.
 
 ### Linux
 
@@ -123,13 +125,13 @@ The downloaded `soundcloud-desktop.flatpak` connects the same repository when in
 
 For AppImage:
 ```bash
-chmod +x soundcloud-desktop-*.AppImage
-./soundcloud-desktop-*.AppImage
+chmod +x soundcloud-desktop_*.AppImage
+./soundcloud-desktop_*.AppImage
 ```
 
 ### macOS
 
-- **Apple Silicon** (M1/M2/M3/M4): `*_arm64.dmg`
+- **Apple Silicon** (M1/M2/M3/M4): `*_aarch64.dmg`
 - **Intel**: `*_x64.dmg`
 
 Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Desktop-EN/releases/latest). First launch: Right-click → Open.
