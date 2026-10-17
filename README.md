@@ -109,7 +109,7 @@ The app needs the Microsoft Edge WebView2 Runtime. The installers (~220 MB) carr
 | `.flatpak` | amd64 | Sandboxed |
 | AUR `soundcloud-bin` | amd64, arm64 | Arch, Manjaro, EndeavourOS |
 
-Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Desktop-EN/releases/latest) or from the [website](https://soundcloud-desktop.fun/download) if GitHub does not open.
+Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Desktop-EN/releases/latest) or from the [website](https://getsoundcloud.app/download) if GitHub does not open.
 
 Arch and derivatives: the official [`soundcloud-bin`](https://aur.archlinux.org/packages/soundcloud-bin) package is published to the AUR automatically within a minute of every release.
 ```bash
