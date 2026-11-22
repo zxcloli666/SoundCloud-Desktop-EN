@@ -7,7 +7,7 @@
 <h1 align="center">SoundCloud Desktop</h1>
 
 <p align="center">
-<b>[<a href="https://github.com/okeydw/SoundCloud-Android">Android</a>] · iOS in development</b><br>
+<b>[<a href="https://github.com/okeydw/SoundCloud-Android">Android</a>] · [<a href="https://github.com/okeydw/SoundCloud-IOS">iOS</a>]</b><br>
 <b>Native desktop app for SoundCloud</b><br>
 No ads · No captcha · No restrictions · Lightweight
 </p>
@@ -33,6 +33,9 @@ No ads · No captcha · No restrictions · Lightweight
 </a>
 <a href="https://github.com/zxcloli666/SoundCloud-Desktop">
 <img src="https://img.shields.io/badge/Source_Code-Main_Repo-0066FF?style=for-the-badge&logo=github" alt="Source Code"/>
+</a>
+<a href="https://t.me/soundcloud_desktop">
+<img src="https://img.shields.io/badge/Telegram-Channel-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"/>
 </a>
 </p>
 
@@ -143,6 +146,11 @@ Download from the [releases page](https://github.com/zxcloli666/SoundCloud-Deskt
 > ```
 > After that, the app will launch normally.
 
+### Android and iPhone
+
+- **Android**: `.apk` from the [releases page](https://github.com/okeydw/SoundCloud-Android/releases/latest), [guide](https://docs.getsoundcloud.app/en/install/android)
+- **iPhone**: `.ipa` from the [releases page](https://github.com/okeydw/SoundCloud-IOS/releases/latest), installed with SideStore: [guide](https://docs.getsoundcloud.app/en/install/ios)
+
 ---
 
 ## Updating
@@ -179,6 +187,7 @@ If you installed a new version but the old one opens, the old one is still runni
 
 | | |
 |---|---|
+| Telegram channel (RU) | [@soundcloud_desktop](https://t.me/soundcloud_desktop) |
 | Suggest a feature | [Discussion #121](https://github.com/zxcloli666/SoundCloud-Desktop/discussions/121) |
 | Report a bug | [Discussion #144](https://github.com/zxcloli666/SoundCloud-Desktop/discussions/144) |
 | Star the repo | [GitHub Stars](https://github.com/zxcloli666/SoundCloud-Desktop/stargazers) — helps with visibility! |
